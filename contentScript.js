@@ -2,19 +2,7 @@
 function appendLOL(toggle = true) {
   const paragraphs = document.querySelectorAll("p");
   paragraphs.forEach((paragraph) => {
-    const lolSpan = paragraph.querySelector("span.lol");
-
-    if (toggle) {
-      // Add LOL
-      if (!lolSpan) {
-        walkTextNodes(paragraph);
-      }
-    } else {
-      // Remove LOL
-      if (lolSpan) {
-        lolSpan.remove();
-      }
-    }
+    walkTextNodes(paragraph);
   });
 }
 
@@ -29,13 +17,15 @@ function walkTextNodes(node) {
     });
   }
 }
+
 // Run the function on page load
 document.addEventListener("DOMContentLoaded", () => appendLOL());
 
-// Listen for messages from the background script
+// Listen for messages from the popup.js script
 browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.action === "toggleLOL") {
+    appendLOL();
     // Toggle the LOL feature
-    appendLOL(!document.querySelector("span.lol") ? true : false);
+    // appendLOL(!document.querySelector("span.lol") ? true : false);
   }
 });
