@@ -1,19 +1,23 @@
 {
-  "manifest_version": 2,
   "name": "LOL Extension",
   "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "scripts": ["background.js"]
+  },
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
+      "matches": ["<all_urls>"],
       "js": ["contentScript.js"]
     }
   ],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
-  "browser_action": {
-    "default_popup": "popup.html"
-  },
-  "permissions": ["activeTab"]
+  "action": {
+    "default_icon": {
+      "16": "icons/32.png",
+      "32": "icons/32.png",
+      "64": "icons/64.png",
+      "128": "icons/64.png"
+    },
+    "default_title": "lol"
+  }
 }
